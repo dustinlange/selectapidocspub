@@ -215,6 +215,12 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#search" class="toc-h2 toc-link" data-title="Introduction">Search</a>
+                  </li>
+                  <li>
+                    <a href="#writing" class="toc-h2 toc-link" data-title="Introduction">Writing</a>
+                  </li>
+                  <li>
                     <a href="#pagination" class="toc-h2 toc-link" data-title="Introduction">Pagination</a>
                   </li>
                   <li>
@@ -309,9 +315,47 @@
         <h1 id='introduction'>Introduction</h1>
 <p>The Nextech Select Open API is a RESTful implementation based on the STU 3 (3.0.1) version of the <a href="https://www.hl7.org/fhir/index.html">FHIR® standard</a>.</p>
 
-<p>Although the FHIR® standard supports both JSON and XML, this API currently only supports JSON.  Therefore any type explicitly defined in the request&#39;s <code>Accept</code> header will be ignored.</p>
+<p>All communication is performed over HTTPS. Although the FHIR® standard supports both JSON and XML, this API currently only supports JSON.  Therefore any type explicitly defined in the request&#39;s <code>Accept</code> header will be ignored.</p>
+<h2 id='search'>Search</h2>
+<p>Searches may be performed via HTTPS calls to the API where supported. Each request must have the following information in the header: (TODO)</p>
+
+<p>A search is executed by performing a GET operation in the RESTful framework
+<code>
+GET http://link-to-the-api/PartnerAPI/[type]?[field1]=[value1]&amp;[field2]=[value2]...
+</code>
+where [type] refers to a resource such as Patient or Appointment followed by one or more query filters.
+```
+GET http://link-to-the-api/PartnerAPI/Patient?identifier=3442</p>
+
+<p>GET http://link-to-the-api/PartnerAPI/Patient?family=Smith</p>
+
+<p>GET http://link-to-the-api/PartnerAPI/Patient?address-city=Tampa&amp;address-state=FL
+```</p>
+<h2 id='writing'>Writing</h2>
+<p>Data writes may be performed via HTTPS calls to the API where supported. Each request must have the following information in the header: (TODO)</p>
+
+<p>A write is executed by performing a PUT operation in the RESTful framework
+<code>
+PUT http://link-to-the-api/PartnerAPI/[type]/[identifier]
+</code>
+where [type] refers to a resource such as Patient or Appointment, [identifier] is the unique identifier of the resource and the body of the request describes a resource and which fields to add or change. This example request path and body would confirm an appointment with the ID 3384:
+<code>
+PUT http://link-to-the-api/PartnerAPI/Appointment/3384
+</code>
+<code>
+{
+  &quot;status&quot;: &quot;fulfilled&quot;
+}
+</code></p>
 <h2 id='pagination'>Pagination</h2>
 <p><em>Applies to: Patient API • Appointment API</em></p>
+
+<p>When a search results in multiple matches, the first ten matches ordered by entered date are returned by default. Included in the result are links to the first set of matches, the following set of matches, the previous set of matches and the last set of matches.</p>
+
+<p>You may overide the number of matches returned, up to fifty, by including <code>_count=[number]</code> in your search. </p>
+<pre class="highlight plaintext"><code>GET http://link-to-the-api/PartnerAPI/Appointment?_count=25
+</code></pre>
+<p>Search results are limited to fifty matches per page.</p>
 <h2 id='errors'>Errors</h2>
 <p><em>Applies to: Patient API • Appointment API</em></p>
 
