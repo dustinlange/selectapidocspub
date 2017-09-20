@@ -313,27 +313,27 @@
 <p>Searches may be performed via HTTPS calls to the API where supported. </p>
 
 <p>A search is executed by performing a GET operation in the RESTful framework<br>
-<code>GET https://link-to-the-api/PartnerAPI/[type]?[field1]=[value1]&amp;[field2]=[value2]...</code><br>
+<code>GET https://select.nextech-api.com/api/[type]?[field1]=[value1]&amp;[field2]=[value2]...</code><br>
 where [type] refers to a resource such as Patient or Appointment followed by one or more query filters.</p>
 <h3 id='example'>Example</h3>
-<p><code>GET https://link-to-the-api/PartnerAPI/Patient?identifier=3442</code><br>
-<code>GET https://link-to-the-api/PartnerAPI/Patient?family=Smith</code><br>
-<code>GET https://link-to-the-api/PartnerAPI/Patient?address-city=Tampa&amp;address-state=FL</code>   </p>
+<p><code>GET https://select.nextech-api.com/api/Patient?identifier=3442</code><br>
+<code>GET https://select.nextech-api.com/api/Patient?family=Smith</code><br>
+<code>GET https://select.nextech-api.com/api/Patient?address-city=Tampa&amp;address-state=FL</code>   </p>
 <h2 id='writing'>Writing</h2>
 <p>Data writes may be performed via HTTPS calls to the API where supported. </p>
 
 <p>A write is executed by performing a PUT operation in the RESTful framework
-<code>PUT https://link-to-the-api/PartnerAPI/{resource}/{identifier}</code>
+<code>PUT https://select.nextech-api.com/api/{resource}/{identifier}</code>
 where <code>{resource}</code> refers to a resource such as Patient or Appointment, <code>{identifier}</code> is the unique identifier of the resource and the body of the request describes a resource and which fields to add or change. This example request path and body would confirm an appointment with the ID 3384:   </p>
 <h3 id='example-2'>Example</h3>
-<p><code>PUT https://link-to-the-api/PartnerAPI/Appointment/3384</code><br>
+<p><code>PUT https://select.nextech-api.com/api/Appointment/3384</code><br>
 <code>Body: { &quot;status&quot;: &quot;fulfilled&quot; }</code></p>
 <h2 id='pagination'>Pagination</h2>
 <p>When a search results in multiple matches, the first ten matches ordered by entered date are returned by default. Included in the result are links to the first set of matches, the following set of matches, the previous set of matches and the last set of matches.</p>
 
 <p>You may overide the number of matches returned, up to fifty, by including <code>_count={number}</code> in your search. </p>
 
-<p><code>GET http://link-to-the-api/PartnerAPI/Appointment?_count=25</code></p>
+<p><code>GET http://select.nextech-api.com/api/Appointment?_count=25</code></p>
 
 <aside class="notice">
 Search results are limited to fifty matches per page.
@@ -515,7 +515,100 @@ Search results are limited to fifty matches per page.
 <p>Get the demographic information for a patient.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /Patient/{patientUID}</code> </p>
-<h3 id='parameters'>Parameters</h3>
+
+<blockquote>
+<p>JSON response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"resourceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Patient"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad2085b5-b974-401d-bfcb-3b865109fd35"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extension"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/v3/Race"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"valueCodeableConcept"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/v3/Race"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2106-3"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caucasian"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/v3/Ethnicity"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"valueCodeableConcept"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hl7.org/fhir/v3/Ethnicity"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2186-5"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Hispanic or Latino"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"official"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad2085b5-b974-401d-bfcb-3b865109fd35"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usual"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4471"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane L Smith"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"family"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"given"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"L"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"telecom"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jsmith@email.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"346-555-3682"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1968-02-04"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"home"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"both"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"line"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"3485 Forest Lane"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Apt 324"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Houston"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77014"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"communication"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"coding"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BCP-47"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"preferred"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='parameters'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
