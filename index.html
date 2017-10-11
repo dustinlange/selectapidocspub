@@ -350,7 +350,7 @@
 <p>Access tokens are used to make API requests on behalf of a user. These tokens are short-lived (1 hour by default) but should be kept confidential in transit and in storage. A <code>access_token</code> and <code>refresh_token</code> pair is issued when requesting an access token.</p>
 
 <p><strong>HTTP Request</strong><br>
-<code>POST https://login.microsoftonline.com/a5f8392a-a68f-4d74-a353-aefc87f29848/oauth2/token</code></p>
+<code>POST https://login.microsoftonline.com/nextech-api.com/oauth2/token</code></p>
 
 <table><thead>
 <tr>
@@ -417,7 +417,7 @@
 <p>Refresh tokens are used to renew an expired access token without providing user credentials. A <code>access_token</code> and <code>refresh_token</code> pair is issued when requesting an access token using the resource owner credentials grant. A new pair is also generated when using the <code>refresh_token</code> grant type. </p>
 
 <p><strong>HTTP Request</strong><br>
-<code>POST https://login.microsoftonline.com/a5f8392a-a68f-4d74-a353-aefc87f29848/oauth2/token</code></p>
+<code>POST https://login.microsoftonline.com/nextech-api.com/oauth2/token</code></p>
 
 <table><thead>
 <tr>
@@ -551,13 +551,47 @@ Search results are limited to 50 matches per page.
 </tr>
 </tbody></table>
 <h2 id='using-postman'>Using Postman</h2>
-<p>To help you get started, here&#39;s a collection of sample API requests in Postman.</p>
+<p>To help you get started, here&#39;s a collection of sample API requests in Postman. You can find more information on making API requests using Postman <a href="https://www.getpostman.com/docs/postman/sending_api_requests/requests">here</a>.</p>
 
 <p><a href="https://app.getpostman.com/run-collection/899edff2cda90cba5159"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <aside class="notice">
 You must have been provided API credentials and Practice ID(s) to use these examples.
 </aside>
+<h3 id='authorization'>Authorization</h3>
+<p>Postman makes it easy to acquire OAuth 2.0 access tokens. Use the information listed below for obtaining a token via the <code>authorization_code</code> grant type. When requesting a new token, you will be redirected to the <em>Auth URL</em> listed below where you can enter your user credentials to authenticate. </p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Auth URL</td>
+<td><code>https://login.microsoftonline.com/nextech-api.com/oauth2/authorize?resource=https%3A%2F%2Fselect.nextech-api.com%2Fapi</code></td>
+</tr>
+<tr>
+<td>Access Token URL</td>
+<td><code>https://login.microsoftonline.com/nextech-api.com/oauth2/token</code></td>
+</tr>
+<tr>
+<td>Callback URL</td>
+<td><code>https://www.getpostman.com/oauth2/callback</code></td>
+</tr>
+<tr>
+<td>Client ID</td>
+<td>Your application ID</td>
+</tr>
+<tr>
+<td>Client Secret</td>
+<td>Your application secret</td>
+</tr>
+<tr>
+<td>Grant Type</td>
+<td><code>Authorization Code</code></td>
+</tr>
+</tbody></table>
 <h1 id='patient-api'>Patient API</h1><h2 id='patient'>Patient</h2><h3 id='overview'>Overview</h3>
 <p>The patient resource contains information about the demographics of a patient.</p>
 <h3 id='fields'>Fields</h3>
@@ -800,7 +834,7 @@ GET https://select.nextech-api.com/api/Patient?address-postalcode=12345
 <p>&nbsp;</p>
 <h4 id='example-get-all-patients-with-birth-dates-between-and-including-1-1-1981-through-5-31-1981'>Example: Get all patients with birth dates between and including 1/1/1981 through 5/31/1981</h4>
 <pre class="center-column">
-GET https://select.nextech-api.com/api/Patient?birthDate=ge1981-01-01&birthDate=lt1981-06-01
+GET https://select.nextech-api.com/api/Patient?birthdate=ge1981-01-01&birthdate=lt1981-06-01
 </pre>
 
 <p>&nbsp;</p>
@@ -887,7 +921,7 @@ successful returns only that patient&#39;s unique identifier.   </p>
 </tbody></table>
 <h4 id='example-get-the-unique-identifier-of-a-patient-given-first-name-last-name-and-birthdate'>Example: Get the unique identifier of a patient given first name, last name, and birthdate</h4>
 <pre class="center-column">
-GET https://select.nextech-api.com/api/Patient/ID?family=Smith&given=John&birthDate=eq1972-04-21
+GET https://select.nextech-api.com/api/Patient/ID?family=Smith&given=John&birthdate=eq1972-04-21
 </pre>
 
 <p>&nbsp;</p>
@@ -1047,7 +1081,7 @@ GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109f
 </tbody></table>
 <h4 id='example-get-all-ccda-39-s-for-a-single-patient-corresponding-to-visits-in-2007'>Example: Get all CCDA&#39;s for a single patient corresponding to visits in 2007</h4>
 <pre class="center-column">
-GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109fd35/Binary?start=2017-01-01&end=2018-01-01
+GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109fd35/Binary/$autogen-ccd-if?start=2017-01-01&end=2018-01-01
 </pre>
 
 <p>&nbsp;</p>
