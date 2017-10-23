@@ -594,6 +594,10 @@ You must have been provided API credentials and Practice ID(s) to use these exam
 <td>Grant Type</td>
 <td><code>Authorization Code</code></td>
 </tr>
+<tr>
+<td>Client Authentication</td>
+<td><code>Send client credentials in body</code></td>
+</tr>
 </tbody></table>
 <h1 id='patient-api'>Patient API</h1><h2 id='patient'>Patient</h2><h3 id='overview'>Overview</h3>
 <p>The patient resource contains information about the demographics of a patient.</p>
@@ -1402,7 +1406,9 @@ GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109f
 
 <p>&nbsp;</p>
 <h3 id='em-create-em'><em>Create</em></h3>
-<p>Creates a non-clincial note for a patient that is visible in the patient&#39;s Notes tab in the Nextech software.</p>
+<p>Creates a non-clinical note for a patient that is visible in the patient&#39;s Notes tab in the Nextech software.  </p>
+
+<p><em>Requires version 12.7</em></p>
 <h4 id='http-request-7'>HTTP Request</h4>
 <p><code>POST /Patient/{patientUid}/Composition</code> </p>
 <h4 id='parameters-7'>Parameters</h4>
@@ -1463,7 +1469,7 @@ GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109f
 <tr>
 <td>section.text.div</td>
 <td>The non-clinical note associated with the subject.</td>
-<td>Yes</td>
+<td>No</td>
 </tr>
 </tbody></table>
 <h4 id='example-create-a-new-non-clinical-note-for-a-patient'>Example: Create a new non-clinical note for a patient</h4>
@@ -2732,7 +2738,39 @@ GET https://select.nextech-api.com/api/Patient/ad2085b5-b974-401d-bfcb-3b865109f
 <td>The appointment start date. When searching for appointments within a date range, the following prefixes may be used: lt, gt, eq, le, ge</td>
 <td>No</td>
 </tr>
+<tr>
+<td>location.id</td>
+<td>query</td>
+<td>The id of the appointment&#39;s location</td>
+<td>No</td>
+</tr>
+<tr>
+<td>location.name</td>
+<td>query</td>
+<td>The name of the appointment&#39;s location.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>practitioner.id</td>
+<td>query</td>
+<td>The id of the appointment&#39;s practitioner</td>
+<td>No</td>
+</tr>
+<tr>
+<td>practitioner.name</td>
+<td>query</td>
+<td>The first or last name of the appointment&#39;s practitioner</td>
+<td>No</td>
+</tr>
+<tr>
+<td>status</td>
+<td>query</td>
+<td>The status of the appointment.  Currently supported values are: cancelled, booked, noshow, arrived, fulfilled, and pending</td>
+<td>No</td>
+</tr>
 </tbody></table>
+<h4 id='multiple-search-values'>Multiple Search Values</h4>
+<p>Multiple search values are supported for all fields except date.  To use multiple values, a comma should be placed in between the values you would like to search for.  This search results in the values being ORed together.   </p>
 <h4 id='example-get-all-appointments-for-a-patient-by-chart-number'>Example: Get all appointments for a patient by chart number</h4>
 <pre class="center-column">
 GET https://select.nextech-api.com/api/Appointment?patient=12345
@@ -2742,6 +2780,30 @@ GET https://select.nextech-api.com/api/Appointment?patient=12345
 <h4 id='example-get-all-appointments-between-and-including-1-1-2017-through-5-31-2017'>Example: Get all appointments between and including 1/1/2017 through 5/31/2017</h4>
 <pre class="center-column">
 GET https://select.nextech-api.com/api/Appointment?date=ge2017-01-01&date=lt2017-06-01
+</pre>
+
+<p>&nbsp;</p>
+<h4 id='example-get-all-appointments-for-dr-smith-or-dr-jones'>Example: Get all appointments for Dr. Smith or Dr. Jones</h4>
+<pre class="center-column">
+GET https://select.nextech-api.com/api/Appointment?practitioner.name=smith,jones
+</pre>
+
+<p>&nbsp;</p>
+<h4 id='example-get-all-appointments-for-a-location-by-id'>Example: Get all appointments for a location by id</h4>
+<pre class="center-column">
+GET https://select.nextech-api.com/api/Appointment?location.id=1
+</pre>
+
+<p>&nbsp;</p>
+<h4 id='example-get-all-appointments-for-either-of-2-locations'>Example: Get all appointments for either of 2 locations</h4>
+<pre class="center-column">
+GET https://select.nextech-api.com/api/Appointment?location.id=1,2
+</pre>
+
+<p>&nbsp;</p>
+<h4 id='example-get-all-cancelled-appointments'>Example: Get all cancelled appointments</h4>
+<pre class="center-column">
+GET https://select.nextech-api.com/api/Appointment?status=cancelled
 </pre>
 
 <p>&nbsp;</p>
